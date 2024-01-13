@@ -1,6 +1,6 @@
- """! @file main.py
-  Doxygen style docstring for the file 
-  """
+"""! @file main.py
+Doxygen style docstring for the file 
+"""
 import pyb
 import utime
 
@@ -10,13 +10,13 @@ timmy.counter ()
 pinC0 = pyb.Pin(pyb.Pin.board.A5, pyb.Pin.OUT_PP)
 adc0 = pyb.ADC(pyb.Pin.board.A3)
 
-  def timer_int(tim_num):
-      """!
-      Doxygen style docstring for interrupt callback function
-      """
-      print(timmy.counter(),adc0.read()) 
-      cqueue.IntQueue
-          
+def timer_int(tim_num):
+  """!
+  Doxygen style docstring for interrupt callback function
+  """
+  print(timmy.counter(),adc0.read()) 
+  cqueue.IntQueue
+      
 timmy.callback timer_int
 
   def step_response (...parameters...):

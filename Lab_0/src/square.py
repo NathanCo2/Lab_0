@@ -3,7 +3,7 @@ import utime
 
 #initialize pins
 pinC0 = pyb.Pin(pyb.Pin.board.A5, pyb.Pin.OUT_PP)
-adc0 = pyb.ADC(pyb.Pin.board.A3)
+adc0 = pyb.ADC(pyb.Pin.board.A5)
 
 #run loop until keyboard interrupt (ctrl+c) pressed
 while True:
