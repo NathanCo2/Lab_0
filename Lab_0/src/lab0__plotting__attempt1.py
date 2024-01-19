@@ -130,7 +130,7 @@ def tk_matplot(plot_function, xlabel, ylabel, title):
 # file is imported as a module by some other main program
 if __name__ == "__main__":
     tk_matplot(plot_example,
-               xlabel="Time (s)",
+               xlabel="Time (ms)",
                ylabel="Voltage (V)",
                title="Step Response Plot")
 
