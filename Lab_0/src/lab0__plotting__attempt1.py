@@ -39,11 +39,14 @@ def plot_example(plot_axes, plot_canvas, xlabel, ylabel):
     @param ylabel The label for the plot's vertical axis
     """
     # Importing data (time, voltage) from the mircontroller
-    with serial.Serial('COM5', 9600) as ser:
-        line = ser.readline()
+    with serial.Serial(port='COM5',baudrate=9600,timeout=1) as ser:
+        ser.write(b'\x03') 
+        ser.write(b'\x04')
+        
         #save_data = ser.write(data)
         for line in ser:
             try:
+                line.decode('utf-8')
                 #splits the string into two CSV
                 split = line.split(',')
                 #creates a list of the x-values (Time [s])
@@ -66,7 +69,10 @@ def plot_example(plot_axes, plot_canvas, xlabel, ylabel):
         plot_axes.set_ylabel(ylabel)
         plot_axes.grid(True)
         plot_canvas.draw()
+        # plotting the values in empty arrays
         
+    ser.close()
+
 def tk_matplot(plot_function, xlabel, ylabel, title):
     """!
     Create a TK window with one embedded Matplotlib plot.
