@@ -14,7 +14,6 @@ https://matplotlib.org/stable/gallery/user_interfaces/embedding_in_tk_sgskip.htm
 """
 
 import math
-import numpy as np
 import time
 import tkinter 
 import serial
@@ -28,7 +27,7 @@ from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg,
 #Creates an empty array
 xaxis_times = []
 yaxis_voltage = []
-xaxis_test = np.arange(0,59)
+
 def plot_example(plot_axes, plot_canvas, xlabel, ylabel):
     """!
     Make an example plot to show a simple(ish) way to embed a plot into a GUI.
@@ -52,6 +51,7 @@ def plot_example(plot_axes, plot_canvas, xlabel, ylabel):
         for line in ser:
             try:
                 line = line.decode('utf-8')
+                print(line, end='')
                 #splits the string into two CSV
                 split = line.split(',')
                 #creates a list of the x-values (Time [s])
@@ -65,14 +65,12 @@ def plot_example(plot_axes, plot_canvas, xlabel, ylabel):
                 #stores the created list of variables in new arrays
                 xaxis_times.append(xx)
                 yaxis_voltage.append(yy)
-                sorted_data = sorted(zip(xaxis_times, yaxis_voltage), key=lambda x: x[0])
-                xaxis_times, yaxis_voltage = zip(*sorted_data)
             except ValueError:
                 print('Error: Value not acceptable')
                 pass
        # plotting the values in empty arrays
-        #print(xaxis_times)
-        #print(yaxis_voltage)
+        print(xaxis_times)
+        print(yaxis_voltage)
         plot_axes.plot(xaxis_times,yaxis_voltage)
         plot_axes.set_xlabel(xlabel)
         plot_axes.set_ylabel(ylabel)
