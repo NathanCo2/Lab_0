@@ -1,5 +1,5 @@
 """!
-@file lab0example.py
+@file lab0_plotting_attempt1.py
 Run real or simulated dynamic response tests and plot the results. This program
 demonstrates a way to make a simple GUI with a plot in it. It uses Tkinter, an
 old-fashioned and ugly but useful GUI library which is included in Python by
@@ -15,13 +15,18 @@ https://matplotlib.org/stable/gallery/user_interfaces/embedding_in_tk_sgskip.htm
 
 import math
 import time
-import tkinter
+import tkinter 
+import serial
+from time import sleep
 from random import random
-from serial import Serial
+from matplotlib import pyplot 
+#from serial import Serial
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg,
                                                NavigationToolbar2Tk)
-
+#Creates an empty array
+xaxis_times = []
+yaxis_voltage = []
 
 def plot_example(plot_axes, plot_canvas, xlabel, ylabel):
     """!
@@ -33,22 +38,35 @@ def plot_example(plot_axes, plot_canvas, xlabel, ylabel):
     @param xlabel The label for the plot's horizontal axis
     @param ylabel The label for the plot's vertical axis
     """
-    # Here we create some fake data. It is put into an X-axis list (times) and
-    # a Y-axis list (boing). Real test data will be read through the USB-serial
-    # port and processed to make two lists like these
-    times = [t / 7 for t in range(200)]
-    rando = random() * 2 * math.pi - math.pi
-    boing = [-math.sin(t + rando) * math.exp(-(t + rando) / 11) for t in times]
-
-    # Draw the plot. Of course, the axes must be labeled. A grid is optional
-    plot_axes.plot(times, boing)
-    plot_axes.set_xlabel('Time [s]')
-    plot_axes.set_ylabel('Voltage [V]')
-   # plot_axes.title('Voltage [V]')
-    plot_axes.grid(True)
-    plot_canvas.draw()
-
-
+    # Importing data (time, voltage) from the mircontroller
+    with serial.Serial('COM5', 9600) as ser:
+        line = ser.readline()
+        #save_data = ser.write(data)
+        for line in ser:
+            try:
+                #splits the string into two CSV
+                split = line.split(',')
+                #creates a list of the x-values (Time [s])
+                x = split[0:1]
+                join_x = ','.join(x)
+                xx = float(join_x)
+                #creates a list of the y-values (Voltage [V])
+                y = split[1:2]
+                join_y = ','.join(y)
+                yy = float(join_y)
+                #stores the created list of variables in new arrays
+                xaxis_times.append(xx)
+                yaxis_voltage.append(yy)
+            except ValueError:
+                print('Error: Not acceptable')
+                pass
+       # plotting the values in empty arrays
+        plot_axes.plot(xaxis_times,yaxis_voltage)
+        plot_axes.set_xlabel(xlabel)
+        plot_axes.set_ylabel(ylabel)
+        plot_axes.grid(True)
+        plot_canvas.draw()
+        
 def tk_matplot(plot_function, xlabel, ylabel, title):
     """!
     Create a TK window with one embedded Matplotlib plot.
