@@ -14,6 +14,7 @@ https://matplotlib.org/stable/gallery/user_interfaces/embedding_in_tk_sgskip.htm
 """
 
 import math
+import numpy as np
 import time
 import tkinter 
 import serial
@@ -27,9 +28,8 @@ from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg,
 #Creates an empty array
 xaxis_times = []
 yaxis_voltage = []
-
-
 def plot_example(plot_axes, plot_canvas, xlabel, ylabel):
+    
     """!
     Make an example plot to show a simple(ish) way to embed a plot into a GUI.
     The data is just a nonsense simulation of a diving board from which a
@@ -39,14 +39,15 @@ def plot_example(plot_axes, plot_canvas, xlabel, ylabel):
     @param xlabel The label for the plot's horizontal axis
     @param ylabel The label for the plot's vertical axis
     """
-    #Clearing the array
-    xaxis_times.clear()
-    yaxis_voltage.clear() 
-    
     # Importing data (time, voltage) from the mircontroller
     with serial.Serial(port='COM5',baudrate=9600,timeout=1) as ser:
         ser.write(b'\x03') 
         ser.write(b'\x04')
+        #while True:
+        #    line = ser.readline().decode('utf-8')
+        #    print(line, end='')
+        
+        #save_data = ser.write(data)
         
         for line in ser:
             try:
@@ -64,13 +65,15 @@ def plot_example(plot_axes, plot_canvas, xlabel, ylabel):
                 #stores the created list of variables in new arrays
                 xaxis_times.append(xx)
                 yaxis_voltage.append(yy)
+                sorted_data = sorted(zip(xaxis_times, yaxis_voltage), key=lambda x: x[0])
+                xaxis_times, yaxis_voltage = zip(*sorted_data)
             except ValueError:
-                print('Error: :(')
+                print('Error: Value not acceptable')
                 pass
        # plotting the values in empty arrays
         print(xaxis_times)
-        #print(yaxis_voltage)
-        plot_axes.plot(xaxis_times, yaxis_voltage)
+        print(yaxis_voltage)
+        plot_axes.plot(xaxis_test, xaxis_times)
         plot_axes.set_xlabel(xlabel)
         plot_axes.set_ylabel(ylabel)
         plot_axes.grid(True)
