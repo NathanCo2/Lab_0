@@ -15,7 +15,8 @@ was incorporated to output a response plot displaying an exponential curve of th
 image displays the output obtained from the step response and the following depicts the created theoretical 
 curve obtained from the user interface.
 
-![IMG_1581](https://github.com/NathanCo2/ME-405/assets/156122419/c8e1464e-f02f-47c1-b63f-981a14a92112)
+<img width="487" alt="image" src="https://github.com/NathanCo2/ME-405/assets/156122419/e175d589-cc74-4ea2-a95f-36126fb78729">
+
 
 
 <img width="487" alt="image" src="https://github.com/NathanCo2/ME-405/assets/156122419/e9875e93-b3b6-44a7-88d8-ed557fc68334">
