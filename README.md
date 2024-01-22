@@ -8,11 +8,12 @@ Perez, Jessica
 Tub: mecha06
 
 Program Description: 
-The step_response.py program was created to run a single step response that output a list of voltage 
-in relation to time as a comma separated values. This created program was also saved as the main.py program 
-in the microcontroller on the Nucleo32. An additional program, lab0_pc_interface,py, invovling user interface 
-was incorporated to output a response plot displaying an exponential curve of the step respose. The attached 
+The step_response.py program was created to run a single-step response that outputs a list of voltage 
+in relation to time as comma-separated values. This created program was also saved as the main.py program 
+in the microcontroller on the Nucleo32. An additional program, lab0_pc_interface.py, involving a user interface 
+was incorporated to output a response plot displaying an exponential curve of the step response. The attached 
 image depicts the created theoretical curve.
 
 
+<img width="487" alt="image" src="https://github.com/NathanCo2/ME-405/assets/156122419/e9875e93-b3b6-44a7-88d8-ed557fc68334">
 
