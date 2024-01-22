@@ -28,7 +28,6 @@ from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg,
 xaxis_times = []
 yaxis_voltage = []
 
-
 def plot_example(plot_axes, plot_canvas, xlabel, ylabel):
     """!
     Make an example plot to show a simple(ish) way to embed a plot into a GUI.
