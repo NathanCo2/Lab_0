@@ -42,6 +42,7 @@ def plot_example(plot_axes, plot_canvas, xlabel, ylabel):
     xaxis_times.clear()
     yaxis_voltage.clear() 
     
+    #experimental curve
     # Importing data (time, voltage) from the mircontroller
     with serial.Serial(port='COM5',baudrate=9600,timeout=1) as ser:
         ser.write(b'\x03') 
@@ -66,13 +67,23 @@ def plot_example(plot_axes, plot_canvas, xlabel, ylabel):
             except ValueError:
                 print('Error: :(')
                 pass
-       # plotting the values in empty arrays
-        print(xaxis_times)
+        
+        #Checking Array
+        #print(xaxis_times)
         #print(yaxis_voltage)
+       
+        # plotting the experimental curves
         plot_axes.plot(xaxis_times, yaxis_voltage)
         plot_axes.set_xlabel(xlabel)
         plot_axes.set_ylabel(ylabel)
         plot_axes.grid(True)
+        
+        # plotting the theoretical curve
+        #theoretical curve
+        t = range(2000)
+        v_max = [3.3*(1-math.exp(-t/(100000000*3.3*10**(-6)))) for t in t] 
+        plot_axes.plot(t, v_max)
+        plot_axes.legend(['Measured', 'Theoretical'])
         plot_canvas.draw()
                 
     ser.close()
