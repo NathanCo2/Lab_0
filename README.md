@@ -19,5 +19,6 @@ created theoretical curve obtained from the user interface.
 
 
 
-<img width="487" alt="image" src="https://github.com/NathanCo2/ME-405/assets/156122419/e9875e93-b3b6-44a7-88d8-ed557fc68334">
+![image](https://github.com/NathanCo2/ME-405/assets/156122419/8302c91a-32f8-4330-9e91-0ae8bf4fc322)
+
 
